@@ -1,0 +1,15 @@
+<h2>New Snippet</h2>
+
+<form action="<%= url_for '/new' %>" method="post" accept-charset="utf-8">
+  <p>
+    <label for='snippet_title'>Title:</label>
+    <%= error_for @snippet, :title, "Title" %>
+    <input type='text' name='snippet[title]' id='snippet_title' value='<%= @snippet.title %>'>
+  </p>
+  <p>
+    <label for='snippet_data'>Code:</label>
+    <%= error_for @snippet, :data, "Code" %>
+    <textarea name='snippet[data]' id='snippet_data' rows='25'><%= @snippet.data %></textarea>
+  </p>
+  <p><input type="submit" value="Save Snippet &rarr;"> or <%= link_to 'cancel', '/' %></p>
+</form>

@@ -1,0 +1,217 @@
+body{
+  background:#fff;
+	font:14px/18px "Lucida Grande", verdana, arial, helvetica, sans-serif;
+  margin:0 20px;
+  }
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  .clearfix {display: inline-block;}
+  /* Hides from IE5/Mac \*/
+  * html .clearfix {height: 1px;}
+  .clearfix {display: block;}
+  /* End hide from IE5/Mac */ 
+
+a{
+  color:#4FA3DA;
+  font:16px/20px "Lucida Grande", verdana, arial, helvetica, sans-serif;
+  }
+a:hover{
+  color:#F65077;
+  }
+
+pre{
+  font:13px/15px monospace;
+  margin:0;
+  padding:0 0 10px;
+  overflow:auto;
+  width:99%;
+  height:450px;
+  }
+  /*
+  pre:hover{
+    position:relative;
+    width:130%;
+    background:#fff;
+    z-index:10;
+    }
+  */
+  
+h2{
+  margin:0 0 10px;
+  }
+  
+h6{
+  margin:0 0 10px;
+  color:#999;
+  font-size:13px;
+  }
+
+label{
+  }
+  
+p{
+  margin:10px 0;
+  }
+ 
+input[type='text'],
+textarea{
+  border:1px solid #999;
+  background:#fafafa;
+  padding:5px;
+  width:98%;
+  }
+input[type='text']:focus,
+textarea:focus{
+  background:#fff;
+  border:#000;
+  }
+
+/** Layout **/
+
+#header{
+  border-bottom:1px dashed #F65077;
+  margin-bottom:20px;
+  }
+  #header h1{
+    margin:0;
+    padding:0 0 0 20px;
+    }
+    #header h1 a{
+      font:bold 60px/55px verdana,arial,sans-serif;
+      text-decoration:none;
+      }  
+
+#menu{
+  text-align:right;
+  margin:0 40px 0 30px;
+  }  
+
+#wrapper{
+  margin:0 40px 0 20px;
+  }
+  #content{
+    float:left;
+    width:79%;
+    }
+  #sidebar{
+    float:right;
+    width:20%;
+    text-align:right;
+    padding-top:20px;
+    z-index:1;
+    }
+    #sidebar h3{
+      margin:0;
+      padding:0;
+      font-weight:bold;
+      color:#000;
+      z-index:1;
+      }
+    #sidebar ul{
+      margin:10px 0 0;
+      padding:0;
+      list-style:none;
+      z-index:1;
+      }
+  
+#footer{
+  margin-top:20px;
+  padding:10px 30px;
+  border-top:1px dashed #F65077;
+  font-size:12px;
+  color:#555;
+  text-align:center;
+  }
+
+/** Support **/
+
+.revision{
+  border-bottom:1px solid #ccc;
+  margin-bottom:5px;
+  padding-bottom:5px;
+  width:80%;
+  }
+  .revision .number{
+    float:left;
+    width:15%;
+   }
+   .revision .number a{
+     font-weight:bold;
+     font-size:13px;
+    }
+  .revision .date{
+    float:left;
+    width:25%;
+    font-size:12px;
+    color:#555;
+    }
+  .revision .actions{
+    float:left;
+    width:49%;
+    }
+    .revision .actions a{
+      font-size:13px;
+      }
+
+.form_error{
+  color:red;
+  font-size:12px;
+  }
+ 
+.diff_sub{
+  color:#F65077;
+  }
+
+.diff_add{
+  color:#009933;
+  }
+
+/** Icons **/
+
+.success {
+	background: #e2fad6 url(../images/accept.png) no-repeat 10px 10px;
+	border: 1px solid #91db6c;
+	padding: 10px;
+	padding-left: 35px;
+	color: #404040;
+	margin-bottom: 10px;
+	font-size:14px;
+	line-height:20px;
+}
+.error{
+	background: #fae1d6 url(../images/exclamation.png) no-repeat 10px 10px;
+	border: 1px solid #f59b73;
+	padding: 10px;
+	padding-left: 35px;
+	color: #404040;
+	margin-bottom: 10px;
+	font-size:14px;
+	line-height:20px;
+}
+.help {
+	background: #eaf0f6 url(../images/help.png) no-repeat 10px 10px;
+	border: 1px solid #bcc6d0;
+	padding: 10px;
+	padding-left: 35px;
+	color: #404040;
+	margin-bottom: 10px;
+	font-size:14px;
+	line-height:20px;
+}
+.tip {
+	background: #fafad6 url(../images/wand.png) no-repeat 10px 10px;
+	border: 1px solid #f6d87d;
+	padding: 10px;
+	padding-left: 35px;
+	color: #404040;
+	margin-bottom: 10px;
+	font-size:14px;
+	line-height:20px;
+}

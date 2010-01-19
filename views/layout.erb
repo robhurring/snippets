@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title><%= @page_title || 'Snippets' %></title>
+    <script src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" charset="utf-8">
+      google.load('jquery', '1');
+    </script>
+    <script src="<%= url_for '/js/application.js' %>" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="<%= url_for '/css/application.css' %>" type="text/css" media="all" charset="utf-8">
+  </head>
+  <body>
+    <div id="header">
+      <h1><%= link_to 'Code Snippets.', '/' %></h1>
+    </div>
+    <div id="menu">
+      ( <%= link_to 'add new', '/new' %> | <%= link_to 'see all', '/all' %> )
+    </div>
+    <div id="wrapper" class='clearfix'>
+      <div id="content">
+        <%= yield %>
+      </div>
+      <% if defined? @updated_snippets %>
+        <div id="sidebar">
+          <h3>updated snippets</h3>
+          <ul>
+            <% @updated_snippets.each do |snippet| %>
+              <li><%= link_to snippet, "/#{snippet.title}" %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    <div id="footer">
+      &copy; Whoever :)
+    </div>
+  </body>
+</html>

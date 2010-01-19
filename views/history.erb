@@ -1,0 +1,21 @@
+<h2><%= @snippet.title %></h2>
+<br/>
+
+<div class='revision clearfix'>
+  <div class='number'><%= link_to ("Version %02d" % @snippet.version), "/#{@snippet.title}" %></div>
+  <div class='date'><%= @snippet.updated_at.strftime '%m/%d/%Y @ %H:%M' %></div>
+  <div class='actions'>
+    (current)
+  </div>
+</div>
+
+<% @history.each do |revision| %>
+  <div class='revision clearfix'>
+    <div class='number'><%= link_to ("Version %02d" % revision.version), "/#{@snippet.title}/#{revision.version}" %></div>
+    <div class='date'><%= revision.updated_at.strftime '%m/%d/%Y @ %H:%M' %></div>
+    <div class='actions'>
+      <%= link_to '(diff to current)', "/diff/#{@snippet.title}/#{revision.version}" %>, 
+      <%= link_to '(revert)', "/revert/#{@snippet.title}/#{revision.version}" %>
+    </div>
+  </div>
+<% end %>
