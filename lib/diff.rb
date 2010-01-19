@@ -1,5 +1,7 @@
 require 'tempfile'
 
+# TODO: do some pre-comparison on a and b so we can skip creating temp files and all that jazz.
+
 module Diffable
   def diff(b, options = {})
     Diff.new(self, b, options).diff
@@ -21,7 +23,7 @@ class Diff
   def diff
     file_a = string_to_file('a', @a).path
     file_b = string_to_file('b', @b).path
-    @output = format_output(`diff -u #{file_a} #{file_b}`)
+    @output = format_output(`diff --unified=-1 #{file_a} #{file_b}`)
     @changed = !@output.strip.empty?
     self
   end
