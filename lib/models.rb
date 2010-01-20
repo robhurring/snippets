@@ -7,7 +7,7 @@ DatabaseAuthentication = {
     'username' => 'root',
     'password' => '',
     'reconnect' => true,
-    'database' => 'snip',
+    'database' => 'snippets',
     'pool' => 5
   },
   'production' => {
@@ -16,13 +16,13 @@ DatabaseAuthentication = {
     'username' => 'homecamp',
     'password' => 'homecamp01',
     'reconnect' => true,
-    'database' => 'snip',
+    'database' => 'snippets',
     'pool' => 5
   }
 }
 
 ActiveRecord::Base.configurations = DatabaseAuthentication
-ActiveRecord::Base.establish_connection ENV['RACK_ENV']
+ActiveRecord::Base.establish_connection (ENV['RACK_ENV'] || 'development')
 ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__)+'/../log/database.log')
 
 class Snippet < ActiveRecord::Base
