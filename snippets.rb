@@ -35,21 +35,25 @@ class Snippets < Sinatra::Base
 
   get '/?' do    
     erb :index
-  end  
+  end 
+  
+  get '/all' do
+    erb :"snippets/all"
+  end
 
 # Add Snippet 
 
   get '/new' do
     @snippet = Snippet.new
-    erb :new
+    erb :"snippets/new"
   end
   
   post '/new' do
     @snippet = Snippet.new(params[:snippet])
     unless @snippet.save
-      erb :new
+      erb :"snippets/new"
     else
-      erb :index
+      redirect url_for("/#{@snippet.title}")
     end
   end
   
@@ -59,7 +63,7 @@ class Snippets < Sinatra::Base
     @snippet = Snippet.find_by_title(params[:title].downcase)
     if @snippet
       @title = "Edit Snippet > #{@snippet.title}"
-      erb :edit
+      erb :"snippets/edit"
     else
       not_found
     end
@@ -70,8 +74,23 @@ class Snippets < Sinatra::Base
     if @snippet.update_attributes(params[:snippet])
       redirect url_for("/#{@snippet.title}")
     else
-      erb :edit
+      erb :"snippets/edit"
     end
+  end
+  
+# Remove
+
+  get '/remove/:title' do
+    @snippet = Snippet.find_by_title(params[:title].downcase)
+    if @snippet
+      if @snippet.destroy
+        redirect url_for("/")
+      else
+        error
+      end
+    else
+      not_found
+    end      
   end
   
 # Revert
@@ -96,7 +115,7 @@ class Snippets < Sinatra::Base
     @snippet = Snippet.find_by_title(params[:title].downcase)
     if @snippet
       @history = @snippet.revisions.all(:order => 'version DESC')
-      erb :history
+      erb :"snippets/history"
     else
       not_found
     end
@@ -114,7 +133,7 @@ class Snippets < Sinatra::Base
         :mine => "Version #{diff_snippet.version} \t #{diff_snippet.updated_at.strftime('%m/%d/%Y @ %H:%M')}", 
         :theirs => "Version #{current_snippet.version} \t #{current_snippet.updated_at.strftime('%m/%d/%Y @ %H:%M')}")
         
-      erb :diff
+      erb :"snippets/diff"
     else
       not_found
     end
@@ -125,7 +144,7 @@ class Snippets < Sinatra::Base
     @revision = params[:splat].first.to_i
 
     if @snippet
-      erb :snippet
+      erb :"snippets/show"
     else
       not_found
     end

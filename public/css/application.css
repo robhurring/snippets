@@ -25,14 +25,19 @@ a{
 a:hover{
   color:#F65077;
   }
+  a.delete{
+    color:#DB453D;
+    }
 
 pre{
-  font:13px/15px monospace;
+  font:12px/16px monospace !important;
   margin:0;
-  padding:0 0 10px;
+  padding:5px;
   overflow:auto;
   width:99%;
-  height:450px;
+  min-height:450px;
+	background: #FAFAFA;  
+	border:1px solid #eee;
   }
   /*
   pre:hover{
@@ -62,17 +67,17 @@ p{
  
 input[type='text'],
 textarea{
-  border:1px solid #999;
+  border:1px solid #ccc;
   background:#fafafa;
-  padding:5px;
   width:98%;
+  padding:5px;
+  font:12px/16px monospace;
   }
-input[type='text']:focus,
-textarea:focus{
-  background:#fff;
-  border:#000;
+  input[type='text']:focus,
+  textarea:focus{
+    background:#fff;
+    border-color:#000;
   }
-
 /** Layout **/
 
 #header{
@@ -100,6 +105,10 @@ textarea:focus{
     float:left;
     width:79%;
     }
+    #snippet_actions{
+      margin-top:10px;
+      color:#8F969E;
+      }
   #sidebar{
     float:right;
     width:20%;

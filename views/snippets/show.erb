@@ -1,0 +1,26 @@
+<% if @snippet.highlightable? %>
+  <%= erb :"snippets/syntax_highlighter", :layout => false, :locals => {:brush => @snippet.type} %>
+<% end %>
+
+<h2><%= @snippet.title %></h2>
+
+<% if revision = @snippet.revision(@revision) %>
+
+  <h6>Version <%= revision.version %> &ndash; <%= revision.updated_at.strftime('%m/%d/%Y @ %H:%M') %></h6>
+  <textarea class='<%= @snippet.highlightable? ? "brush: #{@snippet.type}" : '' %>'><%= revision.data %></textarea>
+
+  <div id='snippet_actions' class='tip'>
+    Preform Action: &nbsp;
+    <%= link_to 'edit', "/edit/#{@snippet.title}" %> | 
+    <%= link_to 'history', "/history/#{@snippet.title}" %> | 
+    <%= link_to 'remove', "/remove/#{@snippet.title}", :html => {:class => 'delete'} %>
+  </div>
+    
+<% else %>
+
+  <div class='error'>
+    This snippet doesn't have a revision <%= @revision %>!
+    <p><%= link_to '&larr; back', '/' %></p>
+  </div>
+
+<% end %>
