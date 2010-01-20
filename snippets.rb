@@ -139,13 +139,13 @@ class Snippets < Sinatra::Base
 
   get '/diff/:title/:revision' do
     revision = params[:revision].to_i
-    current_snippet = Snippet.find_by_title(params[:title].downcase)
+    @current_snippet = Snippet.find_by_title(params[:title].downcase)
     
-    if current_snippet
-      diff_snippet = current_snippet.revision(revision)
-      @diff = diff_snippet.data.diff(current_snippet.data, 
+    if @current_snippet
+      diff_snippet = @current_snippet.revision(revision)
+      @diff = diff_snippet.data.diff(@current_snippet.data, 
         :mine => "Version #{diff_snippet.version} \t #{diff_snippet.updated_at.strftime('%m/%d/%Y @ %H:%M')}", 
-        :theirs => "Version #{current_snippet.version} \t #{current_snippet.updated_at.strftime('%m/%d/%Y @ %H:%M')}")
+        :theirs => "Version #{@current_snippet.version} \t #{@current_snippet.updated_at.strftime('%m/%d/%Y @ %H:%M')}")
         
       cache( erb :"snippets/diff" )
     else

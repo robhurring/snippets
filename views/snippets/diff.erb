@@ -1,1 +1,3 @@
+<h2><%= @current_snippet.title %></h2>
 <pre><%= @diff.to_html %></pre>
+<%= erb(:"snippets/meta", :layout => false, :locals => {:snippet => @current_snippet}) %>

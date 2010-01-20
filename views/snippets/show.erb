@@ -9,12 +9,7 @@
     <![CDATA[<%= revision.data.gsub(/</, '&lt;') %>]]>
   </script>
 
-  <div id='snippet_actions' class='tip'>
-    Preform Action: &nbsp;
-    <%= link_to 'edit', "/edit/#{@snippet.title}" %> | 
-    <%= link_to 'history', "/history/#{@snippet.title}" %> | 
-    <%= link_to 'remove', "/remove/#{@snippet.title}", :html => {:class => 'delete'} %>
-  </div>
+  <%= erb(:"snippets/meta", :layout => false, :locals => {:snippet => @snippet}) %>
     
 <% else %>
 

@@ -1,0 +1,11 @@
+<% if defined? snippet %>
+  <div id='snippet_actions' class='tip'>
+    Preform Action: &nbsp;
+    <% if request.path_info =~ /^\/diff/ %>
+      <%= link_to 'show current', "/#{snippet.title}" %> | 
+    <% end %>
+    <%= link_to 'edit', "/edit/#{snippet.title}" %> | 
+    <%= link_to 'history', "/history/#{snippet.title}" %> | 
+    <%= link_to 'remove', "/remove/#{snippet.title}", :html => {:class => 'delete'} %>
+  </div>
+<% end %>
