@@ -44,7 +44,6 @@ class Snippets < Sinatra::Base
 
   get '/?' do    
     cache( erb :index )
-    ENV['RACK_ENV']
   end 
   
   get '/all' do
