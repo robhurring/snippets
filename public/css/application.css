@@ -79,21 +79,22 @@ textarea{
     border-color:#000;
   }
   
-li{
+ol li,
+ul.languages li{
   padding:5px 0;
   font-size:14px;
   line-height:16px;
   }
-  li a{
+  ol li a{
     font-size:14px;
     line-height:16px;
     }
-  ul{
+  ul.languages{
     width:250px;
     }
-    ul li{
+    ul.languages li{
       }
-      ul li small{
+      ul.languages li small{
         margin-left:25px;
         float:right;
         color:#555;
