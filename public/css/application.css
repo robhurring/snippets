@@ -78,6 +78,28 @@ textarea{
     background:#fff;
     border-color:#000;
   }
+  
+li{
+  padding:5px 0;
+  font-size:14px;
+  line-height:16px;
+  }
+  li a{
+    font-size:14px;
+    line-height:16px;
+    }
+  ul{
+    width:250px;
+    }
+    ul li{
+      }
+      ul li small{
+        margin-left:25px;
+        float:right;
+        color:#555;
+        font-size:12px;
+        }
+
 /** Layout **/
 
 #header{
