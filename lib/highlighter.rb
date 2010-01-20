@@ -8,6 +8,8 @@ module Highlighter
     'shBrushDiff'       => ['diff', 'patch'],
     'shBrushJava'       => ['java'],
     'shBrushJScript'    => ['js', 'jscript', 'javascript'],
+    'shBrushCpp'        => ['cpp', 'c'],
+    'shBrushAS3'        => ['as3', 'as', 'actionscript', 'actionscript3'],
     'shBrushObjC'       => ['objc', 'o', 'm'],
     'shBrushPerl'       => ['pl', 'perl'],
     'shBrushPhp'        => ['php'],
