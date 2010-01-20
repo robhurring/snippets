@@ -25,4 +25,4 @@ namespace :cache do
   end
 end
 
-after :deploy, 'deploy:cleanup', 'cache:clean'
+after :deploy, 'deploy:cleanup'
