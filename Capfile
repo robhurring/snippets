@@ -18,11 +18,4 @@ namespace :deploy do
   end
 end
 
-namespace :cache do
-  desc "Clean Cache"
-  task :clean do
-    run "cd #{current_path}; /usr/bin/rake cache:expire_all"
-  end
-end
-
 after :deploy, 'deploy:cleanup'
