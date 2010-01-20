@@ -31,8 +31,9 @@ class Snippet < ActiveRecord::Base
 
   validates_presence_of :title
   validates_uniqueness_of :title
+  validates_format_of :title, :with => /^[\w\d\.\-]+$/, :on => :create, :message => "is invalid. Use only alphanumeric names without spaces or special punctuation."
   validates_presence_of :data
-  validates_uniqueness_of :data  
+  validates_uniqueness_of :data 
   
   default_scope :order => 'title ASC'
   
