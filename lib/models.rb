@@ -22,7 +22,7 @@ DatabaseAuthentication = {
 }
 
 ActiveRecord::Base.configurations = DatabaseAuthentication
-ActiveRecord::Base.establish_connection ENV['RACK_ENV'] || 'development'
+ActiveRecord::Base.establish_connection ENV['RACK_ENV']
 ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__)+'/../log/database.log')
 
 class Snippet < ActiveRecord::Base
