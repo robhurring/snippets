@@ -70,7 +70,25 @@ class Snippet < ActiveRecord::Base
       return false
     end    
   end
-    
+  
+  def extension
+    return nil unless title.include?('.')
+    @extension ||= title.split(/\./).last
+  end
+  
+  def type
+    return nil unless extension
+    case extension
+    when 'rb'   then 'ruby'
+    else
+      extension
+    end
+  end  
+
+  def highlightable?
+    !!type
+  end
+  
   def to_s
     title
   end
