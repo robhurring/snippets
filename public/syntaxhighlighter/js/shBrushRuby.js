@@ -6,7 +6,7 @@
  * http://alexgorbatchev.com/wiki/SyntaxHighlighter:Donate
  *
  * @version
- * 2.0.320 (May 03 2009)
+ * 2.1.364 (October 15 2009)
  * 
  * @copyright
  * Copyright (C) 2004-2009 Alex Gorbatchev.
@@ -30,7 +30,7 @@
 SyntaxHighlighter.brushes.Ruby = function()
 {
 	// Contributed by Erik Peterson.
-	
+
 	var keywords =	'alias and BEGIN begin break case class def define_method defined do each else elsif ' +
 					'END end ensure false for if in module new next nil not or raise redo rescue retry return ' +
 					'self super then throw true undef unless until when while yield';
@@ -58,4 +58,4 @@ SyntaxHighlighter.brushes.Ruby = function()
 };
 
 SyntaxHighlighter.brushes.Ruby.prototype	= new SyntaxHighlighter.Highlighter();
-SyntaxHighlighter.brushes.Ruby.aliases		= ['ruby', 'rails', 'ror'];
+SyntaxHighlighter.brushes.Ruby.aliases		= ['ruby', 'rails', 'rb'];

@@ -1,1 +1,11 @@
 <h2>All Snippets</h2>
+
+<% @snippets.each do |snippet| %>
+  <div class='snippet clearfix'>
+    <div class='title'><%= link_to snippet.title, "/#{snippet.title}" %></div>
+    <div class='meta'>
+      Version: <%= snippet.version %>, 
+      Modified: <%= snippet.updated_at.strftime '%m/%d/%Y @ %H:%M' %>
+    </div>
+  </div>
+<% end %>

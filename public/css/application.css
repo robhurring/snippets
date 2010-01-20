@@ -141,6 +141,24 @@ textarea{
 
 /** Support **/
 
+.snippet{
+  border-bottom:1px solid #e9e9e9;
+  margin-bottom:5px;
+  padding-bottom:5px;
+  width:98%;
+  }
+  .snippet .title{
+    float:left;
+    width:60%;
+    }
+  .snippet .meta{
+    float:right;
+    text-align:right;
+    width:38%;
+    color:#555;
+    font-size:12px;
+    }
+
 .revision{
   border-bottom:1px solid #ccc;
   margin-bottom:5px;

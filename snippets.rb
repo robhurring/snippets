@@ -38,6 +38,7 @@ class Snippets < Sinatra::Base
   end 
   
   get '/all' do
+    @snippets = Snippet.all
     erb :"snippets/all"
   end
 

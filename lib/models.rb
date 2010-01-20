@@ -27,13 +27,14 @@ ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__)+'/../log/database.
 
 class Snippet < ActiveRecord::Base
   attr_reader :recently_reverted
-
   has_many :revisions, :dependent => :destroy
 
   validates_presence_of :title
   validates_uniqueness_of :title
   validates_presence_of :data
   validates_uniqueness_of :data  
+  
+  default_scope :order => 'title ASC'
   
   before_save :version_it, :if => :should_version?
 
@@ -74,19 +75,6 @@ class Snippet < ActiveRecord::Base
   def extension
     return nil unless title.include?('.')
     @extension ||= title.split(/\./).last
-  end
-  
-  def type
-    return nil unless extension
-    case extension
-    when 'rb'   then 'ruby'
-    else
-      extension
-    end
-  end  
-
-  def highlightable?
-    !!type
   end
   
   def to_s
