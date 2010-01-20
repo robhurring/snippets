@@ -42,11 +42,13 @@ class Snippets < Sinatra::Base
 
 # Main Pages
 
-  get '/?' do    
+  get '/?' do 
+    @page_title = 'code snippets'  
     cache( erb :index )
   end 
   
   get '/all' do
+    @page_title = 'Snippet.all'
     @snippets = Snippet.all
     cache( erb :"snippets/all" )
   end
@@ -54,6 +56,7 @@ class Snippets < Sinatra::Base
 # Add Snippet 
 
   get '/new' do
+    @page_title = 'Snippet.new'
     @snippet = Snippet.new
     cache( erb :"snippets/new" )
   end
@@ -64,6 +67,7 @@ class Snippets < Sinatra::Base
       cache_expire_all
       redirect url_for("/#{@snippet.title}")
     else
+      @page_title = 'puts snippet.errors'
       erb :"snippets/new"
     end
   end
@@ -72,8 +76,8 @@ class Snippets < Sinatra::Base
 
   get '/edit/:title' do
     @snippet = Snippet.find_by_title(params[:title].downcase)
+    @page_title = "edit(#{@snippet.try(:title)})"
     if @snippet
-      @title = "Edit Snippet > #{@snippet.title}"
       erb :"snippets/edit"
     else
       not_found
@@ -82,6 +86,7 @@ class Snippets < Sinatra::Base
 
   post '/edit/:title' do
     @snippet = Snippet.find_by_title(params[:title].downcase)
+    @page_title = "edit(#{@snippet.try(:title)})"
     if @snippet.update_attributes(params[:snippet])
       cache_expire_all
       redirect url_for("/#{@snippet.title}")
@@ -128,6 +133,7 @@ class Snippets < Sinatra::Base
   get '/history/:title' do
     @snippet = Snippet.find_by_title(params[:title].downcase)
     if @snippet
+      @page_title = "history(#{@snippet.title})"
       @history = @snippet.revisions.all(:order => 'version DESC')
       cache( erb :"snippets/history" )
     else
@@ -142,11 +148,12 @@ class Snippets < Sinatra::Base
     @current_snippet = Snippet.find_by_title(params[:title].downcase)
     
     if @current_snippet
+      @page_title = "diff #{@current_snippet.title}.#{@current_snippet.version} #{@current_snippet.title}.#{revision} > output"
       diff_snippet = @current_snippet.revision(revision)
       @diff = diff_snippet.data.diff(@current_snippet.data, 
         :mine => "Version #{diff_snippet.version} \t #{diff_snippet.updated_at.strftime('%m/%d/%Y @ %H:%M')}", 
         :theirs => "Version #{@current_snippet.version} \t #{@current_snippet.updated_at.strftime('%m/%d/%Y @ %H:%M')}")
-        
+      
       cache( erb :"snippets/diff" )
     else
       not_found
@@ -156,8 +163,9 @@ class Snippets < Sinatra::Base
   get '/:title/?*' do
     @snippet = Snippet.find_by_title(params[:title].downcase)
     @revision = params[:splat].first.to_i
-
+        
     if @snippet
+      @page_title = "#{@snippet}.#{@snippet.version}"
       cache( erb :"snippets/show" )
     else
       not_found
