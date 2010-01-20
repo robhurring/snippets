@@ -40,8 +40,11 @@ class Snippets < Sinatra::Base
     cache( erb :"500" )
   end
 
+# Main Pages
+
   get '/?' do    
     cache( erb :index )
+    ENV['RACK_ENV']
   end 
   
   get '/all' do
@@ -58,11 +61,11 @@ class Snippets < Sinatra::Base
   
   post '/new' do
     @snippet = Snippet.new(params[:snippet])
-    unless @snippet.save
+    if @snippet.save
       cache_expire_all
-      erb :"snippets/new"
-    else
       redirect url_for("/#{@snippet.title}")
+    else
+      erb :"snippets/new"
     end
   end
   
