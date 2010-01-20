@@ -2,6 +2,7 @@ $: << File.join(File.dirname(__FILE__), 'lib')
 require 'environment'
 
 class Snippets < Sinatra::Base
+  include Caching
   AnalyticsCode = ''
   
   use ActiveRecord::ConnectionAdapters::ConnectionManagement
@@ -12,9 +13,15 @@ class Snippets < Sinatra::Base
   
   enable :sessions, :logging, :dump_errors, :static
   set :environment => (ENV['RACK_ENV'] || :development), :host => 'webops.local.com'
+  set :public, File.dirname(__FILE__)+'/public'
   
   configure(:production) do
     use Rack::GoogleAnalytics, :web_property_id => AnalyticsCode
+    enable :caching
+  end
+  
+  configure do
+    Log = Logger.new('log/snippets.log')
   end
   
   helpers Sinatra::Helpers
@@ -26,32 +33,33 @@ class Snippets < Sinatra::Base
   end
 
   not_found do
-    erb :"404"
+    cache( erb :"404" )
   end
   
   error do
-    erb :"500"
+    cache( erb :"500" )
   end
 
   get '/?' do    
-    erb :index
+    cache( erb :index )
   end 
   
   get '/all' do
     @snippets = Snippet.all
-    erb :"snippets/all"
+    cache( erb :"snippets/all" )
   end
 
 # Add Snippet 
 
   get '/new' do
     @snippet = Snippet.new
-    erb :"snippets/new"
+    cache( erb :"snippets/new" )
   end
   
   post '/new' do
     @snippet = Snippet.new(params[:snippet])
     unless @snippet.save
+      cache_expire_all
       erb :"snippets/new"
     else
       redirect url_for("/#{@snippet.title}")
@@ -73,6 +81,7 @@ class Snippets < Sinatra::Base
   post '/edit/:title' do
     @snippet = Snippet.find_by_title(params[:title].downcase)
     if @snippet.update_attributes(params[:snippet])
+      cache_expire_all
       redirect url_for("/#{@snippet.title}")
     else
       erb :"snippets/edit"
@@ -82,9 +91,10 @@ class Snippets < Sinatra::Base
 # Remove
 
   get '/remove/:title' do
-    @snippet = Snippet.find_by_title(params[:title].downcase)
-    if @snippet
-      if @snippet.destroy
+    snippet = Snippet.find_by_title(params[:title].downcase)
+    if snippet
+      if snippet.destroy
+        expire_snippet_cache(snippet)
         redirect url_for("/")
       else
         error
@@ -101,6 +111,7 @@ class Snippets < Sinatra::Base
     
     if snippet
       if snippet.revert_to(params[:revision].to_i)
+        expire_snippet_cache(snippet)
         redirect url_for("/#{snippet.title}")
       else
         error
@@ -116,7 +127,7 @@ class Snippets < Sinatra::Base
     @snippet = Snippet.find_by_title(params[:title].downcase)
     if @snippet
       @history = @snippet.revisions.all(:order => 'version DESC')
-      erb :"snippets/history"
+      cache( erb :"snippets/history" )
     else
       not_found
     end
@@ -134,7 +145,7 @@ class Snippets < Sinatra::Base
         :mine => "Version #{diff_snippet.version} \t #{diff_snippet.updated_at.strftime('%m/%d/%Y @ %H:%M')}", 
         :theirs => "Version #{current_snippet.version} \t #{current_snippet.updated_at.strftime('%m/%d/%Y @ %H:%M')}")
         
-      erb :"snippets/diff"
+      cache( erb :"snippets/diff" )
     else
       not_found
     end
@@ -145,10 +156,26 @@ class Snippets < Sinatra::Base
     @revision = params[:splat].first.to_i
 
     if @snippet
-      erb :"snippets/show"
+      cache( erb :"snippets/show" )
     else
       not_found
     end
+  end
+  
+private
+
+  def cache_expire_all
+    return unless options.caching
+    
+    folders = Dir["#{options.public}/{history,diff}"]
+    files = Dir["#{options.public}/*.html"]
+    (folders + files).each{ |file| FileUtils.rm_rf(file) }
+  end
+
+  def expire_snippet_cache(snippet)
+    return unless options.caching
+    
+    Dir["#{options.public}/{.,history,diff}/#{snippet.title}*"].each{ |file| FileUtils.rm_rf(file) }
   end
   
 end
