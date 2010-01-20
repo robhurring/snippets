@@ -96,7 +96,7 @@ class Snippets < Sinatra::Base
     snippet = Snippet.find_by_title(params[:title].downcase)
     if snippet
       if snippet.destroy
-        expire_snippet_cache(snippet)
+        cache_expire_all
         redirect url_for("/")
       else
         error
