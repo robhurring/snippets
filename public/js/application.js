@@ -19,7 +19,7 @@ function setup_highlighter()
 	SyntaxHighlighter.config.strings.alert = '[Snippets]\n\n';
 	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
 	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
-	SyntaxHighlighter.defaults['gutter'] = true;
+	SyntaxHighlighter.defaults['gutter'] = false;
 	SyntaxHighlighter.defaults['tab-size'] = 2;
 	SyntaxHighlighter.defaults['wrap-lines'] = true;
 	SyntaxHighlighter.all();  
