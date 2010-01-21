@@ -22,12 +22,17 @@
 .syntaxhighlighter .line .number
 {
 	color: #aaa !important;
+  width:25px !important;
+}
+.syntaxhighlighter .line .number code
+{
+  background:#ECECEC !important;	
 }
 
 /* Add border to the lines */
 .syntaxhighlighter .line .content
 {
-	border-left: 2px solid #ccc !important;
+	border-left: 2px solid #ddd !important;
 	color: #000 !important;
 }
 
@@ -176,6 +181,13 @@
 	color: red !important; 
 }
 
+.syntaxhighlighter .lines{
+  border:1px solid #ddd;
+}
+
+.syntaxhighlighter .line .content{
+  padding-left:10px !important;
+}
 /** end ugliness */
 
 

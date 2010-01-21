@@ -36,7 +36,7 @@ pre{
   overflow:auto;
   width:99%;
   min-height:450px;
-	background: #FAFAFA;  
+	background: #fbfbfb;  
 	border:1px solid #eee;
   }
   /*
@@ -218,13 +218,17 @@ ul.languages li{
   color:red;
   font-size:12px;
   }
- 
+
+.diff_meta{
+  background:#EAF2F5;
+  color:#999;
+  }
 .diff_sub{
-  color:#F65077;
+  background:#fdd;
   }
 
 .diff_add{
-  color:#009933;
+  background:#dfd;
   }
 
 /** Icons **/

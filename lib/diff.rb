@@ -32,10 +32,12 @@ class Diff
     diff.output.each_line.inject("") do |output, line|
       output + \
         case line[0]
+        when '@'
+          "<div class='#{options[:meta_class] || 'diff_meta'}'>#{line}</div>"
         when '-'
-          "<span class='#{options[:sub_class] || 'diff_sub'}'>#{line.strip}</span>\n"
+          "<div class='#{options[:sub_class] || 'diff_sub'}'>#{line}</div>"
         when '+'
-          "<span class='#{options[:add_class] || 'diff_add'}'>#{line.strip}</span>\n"
+          "<div class='#{options[:add_class] || 'diff_add'}'>#{line}</div>"
         else
           line
         end
