@@ -20,7 +20,6 @@ body{
 
 a{
   color:#4FA3DA;
-  font:16px/20px "Lucida Grande", verdana, arial, helvetica, sans-serif;
   }
 a:hover{
   color:#F65077;
@@ -120,7 +119,9 @@ ul.languages li{
   text-align:right;
   margin:0 40px 0 30px;
   }  
-
+  #menu a{
+    font:16px/20px "Lucida Grande", verdana, arial, helvetica, sans-serif;
+    }
 #wrapper{
   margin:0 40px 0 20px;
   }
@@ -132,12 +133,18 @@ ul.languages li{
       margin-top:10px;
       color:#8F969E;
       }
+      #snippet_actions a{
+        font:16px/20px "Lucida Grande", verdana, arial, helvetica, sans-serif;
+        }
   #sidebar{
     float:right;
     width:20%;
     text-align:right;
     padding-top:20px;
     z-index:1;
+    }
+    #sidebar a{
+      font:16px/20px "Lucida Grande", verdana, arial, helvetica, sans-serif;
     }
     #sidebar h3{
       margin:0;
