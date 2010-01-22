@@ -88,4 +88,4 @@ SyntaxHighlighter.brushes.Php = function()
 };
 
 SyntaxHighlighter.brushes.Php.prototype	= new SyntaxHighlighter.Highlighter();
-SyntaxHighlighter.brushes.Php.aliases	= ['php'];
+SyntaxHighlighter.brushes.Php.aliases	= ['php', 'phps'];
