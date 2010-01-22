@@ -12,7 +12,7 @@ module Highlighter
     'shBrushAS3'        => ['as3', 'as', 'actionscript', 'actionscript3'],
     'shBrushObjC'       => ['objc', 'o', 'm'],
     'shBrushPerl'       => ['pl', 'perl'],
-    'shBrushPhp'        => ['php'],
+    'shBrushPhp'        => ['php', 'phps'],
     'shBrushPython'     => ['py', 'python'],
     'shBrushRuby'       => ['rb', 'ruby', 'rails', 'ror'],
     'shBrushSql'        => ['sql'],
