@@ -6,7 +6,7 @@
 
   <h6>Version <%= revision.version %> &ndash; <%= revision.updated_at.strftime('%m/%d/%Y @ %H:%M') %></h6>
   <script type="syntaxhighlighter" class="brush: <%= Highlighter.language_for_extension(@snippet.extension) %>">
-    <![CDATA[<%= revision.data.gsub(/</, '&lt;') %>]]>
+    <![CDATA[<%= revision.data.gsub(/&/i, '&amp;').gsub(/</, '&lt;') %>]]>
   </script>
 
   <%= erb(:"snippets/meta", :layout => false, :locals => {:snippet => @snippet}) %>
