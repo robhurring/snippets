@@ -3,7 +3,7 @@ require 'environment'
 
 class Snippets < Sinatra::Base
   include Caching
-  AnalyticsCode = ''
+  AnalyticsCode = 'UA-8083411-4'
   
   use ActiveRecord::ConnectionAdapters::ConnectionManagement
   use ActiveRecord::QueryCache # only works for default AR::Base connections, newly established_connections won't inherit the caching
