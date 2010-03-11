@@ -1,0 +1,3 @@
+mkmf.log
+log/*.log
+tmp/**/*
