@@ -1,6 +1,7 @@
 require 'tempfile'
 
 # TODO: do some pre-comparison on a and b so we can skip creating temp files and all that jazz.
+# NOTE: this is so ghetto ;)
 
 module Diffable
   def diff(b, options = {})
