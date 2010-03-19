@@ -1,8 +1,7 @@
-require 'rubygems'
 require 'snippets'
 
 log = ::File.new('log/snippets.log', 'a+')
-STDERR.reopen(log)
-STDOUT.reopen(log)
+$stderr.reopen(log)
+$stdout.reopen(log)
 
 run Snippets
