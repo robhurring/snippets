@@ -1,28 +1,6 @@
 require 'active_record'
 
-DatabaseAuthentication = {
-  'development' => {
-    'adapter' => 'mysql',
-    'host' => 'localhost',
-    'username' => 'root',
-    'password' => '',
-    'reconnect' => true,
-    'database' => 'snippets',
-    'pool' => 5
-  },
-  'production' => {
-    'adapter' => 'mysql',
-    'host' => 'localhost',
-    'username' => 'homecamp',
-    'password' => 'homecamp01',
-    'reconnect' => true,
-    'database' => 'snippets',
-    'pool' => 5
-  }
-}
-
-ActiveRecord::Base.configurations = DatabaseAuthentication
-ActiveRecord::Base.establish_connection (ENV['RACK_ENV'] || 'development')
+ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => 'snippets.db', :pool => 5, :timeout => 5_000)
 ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__)+'/../log/database.log')
 
 class Snippet < ActiveRecord::Base
