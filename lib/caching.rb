@@ -1,14 +1,13 @@
 require 'fileutils'
 require 'pathname'
 
-module Caching
+# NOTE: based off another sinatra-cache gem, but can't remember which since it was a while ago. put the credits in here
 
+module Caching
   def self.included(base)
     base.disable :caching
     base.set :cache_output_dir, ''
     base.set :cache_page_extension, '.html'
-    base.set :cache_logging, true
-    base.set :cache_logging_level, :info
   end
   
   def cache(content, &block)
@@ -18,7 +17,6 @@ module Caching
       path = cache_page_path(request.path_info)
       FileUtils.makedirs(File.dirname(path))
       open(path, 'wb+') { |f| f << content }
-      log("Cached Page: [#{path}]",:info) 
       content
     end
   end
@@ -30,9 +28,6 @@ module Caching
     
     if File.exist?(path)
       File.delete(path)
-      log("Expired Page deleted at: [#{path}]",:info)
-    else
-      log("No Expired Page was found at the path: [#{path}]",:info)
     end
   end
   
@@ -54,8 +49,4 @@ private
     
     "#{cache_dir}/#{cache_file_name(path)}"
   end
-  
-  def log(msg,scope=:debug)
-  end
-  
 end
