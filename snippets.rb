@@ -67,8 +67,8 @@ class Snippets < Sinatra::Base
   
 # Edit Snippet
 
-  get '/edit/:title' do
-    @snippet = Snippet.find_by_title(params[:title].downcase)
+  get '/edit/:title' do |title|
+    @snippet = Snippet.find_by_title(title.downcase)
     @page_title = "edit(#{@snippet.try(:title)})"
     if @snippet
       erb :"snippets/edit"
@@ -77,8 +77,8 @@ class Snippets < Sinatra::Base
     end
   end
 
-  post '/edit/:title' do
-    @snippet = Snippet.find_by_title(params[:title].downcase)
+  post '/edit/:title' do |title|
+    @snippet = Snippet.find_by_title(title.downcase)
     @page_title = "edit(#{@snippet.try(:title)})"
     if @snippet.update_attributes(params[:snippet])
       cache_expire_all
@@ -90,8 +90,8 @@ class Snippets < Sinatra::Base
   
 # Remove
 
-  get '/remove/:title' do
-    snippet = Snippet.find_by_title(params[:title].downcase)
+  get '/remove/:title' do |title|
+    snippet = Snippet.find_by_title(title.downcase)
     if snippet
       if snippet.destroy
         cache_expire_all
@@ -106,11 +106,11 @@ class Snippets < Sinatra::Base
   
 # Revert
 
-  get '/revert/:title/:revision' do
-    snippet = Snippet.find_by_title(params[:title].downcase)
+  get '/revert/:title/:revision' do |title, revision|
+    snippet = Snippet.find_by_title(title.downcase)
     
     if snippet
-      if snippet.revert_to(params[:revision].to_i)
+      if snippet.revert_to(revision.to_i)
         expire_snippet_cache(snippet)
         redirect url_for("/#{snippet.title}")
       else
@@ -123,8 +123,8 @@ class Snippets < Sinatra::Base
   
 # History
 
-  get '/history/:title' do
-    @snippet = Snippet.find_by_title(params[:title].downcase)
+  get '/history/:title' do |title|
+    @snippet = Snippet.find_by_title(title.downcase)
     if @snippet
       @page_title = "history(#{@snippet.title})"
       @history = @snippet.revisions.all(:order => 'version DESC')
@@ -136,9 +136,9 @@ class Snippets < Sinatra::Base
 
 # View Snippet
 
-  get '/diff/:title/:revision' do
-    revision = params[:revision].to_i
-    @current_snippet = Snippet.find_by_title(params[:title].downcase)
+  get '/diff/:title/:revision' do |title, revision|
+    revision = revision.to_i
+    @current_snippet = Snippet.find_by_title(title.downcase)
     
     if @current_snippet
       @page_title = "diff #{@current_snippet.title}.#{@current_snippet.version} #{@current_snippet.title}.#{revision} > output"
