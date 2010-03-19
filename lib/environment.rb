@@ -1,8 +1,8 @@
 $: << File.dirname(__FILE__)
 
+require 'rubygems'
 require 'sinatra/base'
 require 'rack-flash'
-require 'rack/google_analytics'
 
 require 'core_ext'
 require 'helpers'
