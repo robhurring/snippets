@@ -1,5 +1,4 @@
 module Highlighter
-  
   DefaultBrush    = 'shBrushPlain'
   DefaultLanguage = 'plain'
   BrushMap = {
@@ -32,5 +31,4 @@ module Highlighter
   def self.brush_for_extension(extension)
     brush_for_language(language_for_extension(extension))    
   end
-  
 end
