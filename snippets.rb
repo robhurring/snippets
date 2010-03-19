@@ -3,7 +3,6 @@ require 'environment'
 
 class Snippets < Sinatra::Base
   include Caching
-  AnalyticsCode = 'UA-8083411-4'
   
   use ActiveRecord::ConnectionAdapters::ConnectionManagement
   use ActiveRecord::QueryCache # only works for default AR::Base connections, newly established_connections won't inherit the caching
@@ -15,14 +14,8 @@ class Snippets < Sinatra::Base
   set :environment => (ENV['RACK_ENV'] || :development), :host => 'webops.local.com'
   set :public, File.dirname(__FILE__)+'/public'
   
-  configure(:production) do
-    use Rack::GoogleAnalytics, :web_property_id => AnalyticsCode
-    enable :caching
-  end
-  
-  configure do
-    Log = Logger.new('log/snippets.log')
-  end
+  configure(:production){ enable :caching }
+  configure{ Log = Logger.new('log/snippets.log') }
   
   helpers Sinatra::Helpers
 
