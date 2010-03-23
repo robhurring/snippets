@@ -4,9 +4,6 @@ require 'environment'
 class Snippets < Sinatra::Base
   include Caching
   
-  use ActiveRecord::ConnectionAdapters::ConnectionManagement
-  use ActiveRecord::QueryCache # only works for default AR::Base connections, newly established_connections won't inherit the caching
-  
   use Rack::Flash, :sweep => true, :accessorize => [:notice]
   use Rack::Static, :urls => ['/css', '/images', '/js'], :root => 'public'    
   
